@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  api:
+    build: .
+    container_name: resume_api
+    image: resume_api
+    volumes:
+      - ../resume-api:/opt/code
+    ports:
+      - "8080:8080"
