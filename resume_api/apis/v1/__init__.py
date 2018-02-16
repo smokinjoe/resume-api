@@ -1,5 +1,6 @@
 from arrested import ArrestedAPI
 from .users import users_resource
+from .projects import projects_resource
 from .middleware import basic_auth
 
 from .middleware import basic_auth
