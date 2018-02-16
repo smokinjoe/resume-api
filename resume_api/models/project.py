@@ -4,4 +4,6 @@ __all__ = ['Project']
 
 class Project(BaseMixin, db.Model):
     __tablename__ = 'project'
-    name = db.Column(db.Unicode(255), nullable=False)
+    title = db.Column(db.Unicode(255), nullable=False)
+    link_title = db.Column(db.Unicode(255), nullable=False)
+    link_url = db.Column(db.Unicode(255), nullable=False)

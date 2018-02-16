@@ -4,4 +4,6 @@ from resume_api.models import Project
 
 class ProjectMapper(BaseMapper):
     __type__ = Project
-    name = field.String()
+    title = field.String()
+    link_title = field.String()
+    link_url = field.String()
