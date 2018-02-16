@@ -1,13 +1,13 @@
 from arrested import Resource
 from arrested.contrib.kim_arrested import KimEndpoint
-from arrested.contrib.sql_alchemy import DBListMixin
+from arrested.contrib.sql_alchemy import DBListMixin, DBCreateMixin
 
 from resume_api.models import db, Project
 from .mappers import ProjectMapper
 
 projects_resource = Resource('projects', __name__, url_prefix='/projects')
 
-class ProjectsIndexEndpoint(KimEndpoint, DBListMixin):
+class ProjectsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     name = 'list'
     many = True
     mapper_class = ProjectMapper
