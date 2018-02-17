@@ -26,3 +26,4 @@ class BaseMixin(object):
 
 from .user import *
 from .project import *
+from .client import *
