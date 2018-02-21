@@ -4,6 +4,7 @@ from flask import current_app, request, g
 from werkzeug.wrappers import Response
 from werkzeug.exceptions import HTTPException
 
+from .utils import decode_client_token, get_token_from_request
 from resume_api.models import Client
 
 def check_auth(auth):
@@ -43,3 +44,26 @@ def get_api_client_from_request(endpoint):
         endpoint.return_error(404, payload=payload)
 
     g.api_client = client
+
+def get_client_token(endpoint):
+    """Validate the request has a valid JWT token. If the provided api_key
+    and token are valid the JWT will be decoded and stored on g.token for
+    use later on.
+    """
+    token = get_token_from_request()
+    if not token:
+        payload = { 'message': 'Request does not contain a token' }
+        endpoint.return_error(
+            401,
+            payload=payload
+        )
+
+    payload = decode_client_token(g.api_client, token)
+    if not payload:
+        payload = { 'message': 'Invalid token' }
+        endpoint.return_error(
+            401,
+            payload=payload
+        )
+
+    g.token = payload
