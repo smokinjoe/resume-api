@@ -17,7 +17,7 @@ class ProjectsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
         stmt = db.session.query(WeaponOfChoice)
         return stmt
 
-class ProjectObjectEndpoint(KimEndpoint, DBObjectMixing):
+class ProjectObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'
     url = '/<string:obj_id>'
     mapper_class = WeaponOfChoiceMapper
