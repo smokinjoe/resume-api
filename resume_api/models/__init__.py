@@ -27,4 +27,5 @@ from .user import *
 from .project import *
 from .school import *
 from .weapon_of_choice import *
+from .employment_experience import *
 from .client import *
