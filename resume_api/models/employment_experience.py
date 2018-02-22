@@ -8,4 +8,4 @@ class EmploymentExperience(BaseMixin, db.Model):
     company_role = db.Column(db.Unicode(255), nullable=False)
     date_start = db.Column(db.Unicode(127), nullable=False)
     date_end = db.Column(db.Unicode(127), nullable=False)
-    responsibilities = db.Column(db.PickleType(), nullable=False)
+    items = db.Column(db.PickleType(), nullable=False)
