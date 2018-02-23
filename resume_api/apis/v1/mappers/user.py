@@ -11,6 +11,12 @@ class UserMapper(BaseMapper):
 
     name = field.String()
     email = field.String()
+    website = field.String()
+    street_address = field.String()
+    city = field.String()
+    state = field.String()
+    zip = field.String()
+    phone = field.String()
 
     __roles__ = {
         '__default__': role.blacklist('password')

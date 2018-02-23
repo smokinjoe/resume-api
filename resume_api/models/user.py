@@ -16,3 +16,9 @@ class User(BaseMixin, db.Model):
             'pbkdf2_sha512',
         ],
     ))
+    website = db.Column(db.Unicode(127))
+    street_address = db.Column(db.Unicode(127))
+    city = db.Column(db.Unicode(127))
+    state = db.Column(db.Unicode(127))
+    zip = db.Column(db.Unicode(127))
+    phone = db.Column(db.Unicode(127))
