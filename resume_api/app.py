@@ -4,7 +4,6 @@ from flask_cors import CORS
 from resume_api.models import db
 from resume_api.apis import api_v1
 
-
 def create_app():
 
     app = Flask(__name__)

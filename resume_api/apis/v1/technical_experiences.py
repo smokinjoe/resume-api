@@ -7,7 +7,7 @@ from .mappers import TechnicalExperienceMapper
 
 technical_experiences_resource = Resource('technical_experience', __name__, url_prefix='/technical_experiences')
 
-class TechnicalExperiencesIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
+class TechnicalExperiencesIndexEndpoint(KimEndpoint, DBListMixin):
     name = 'list'
     many = True
     mapper_class = TechnicalExperienceMapper
@@ -17,6 +17,18 @@ class TechnicalExperiencesIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin)
         stmt = db.session.query(TechnicalExperience)
         return stmt
 
+# JOE: NOTE: Disconnected until I have the auth figured out
+class TechnicalExperiencesCreateEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
+    name = 'list'
+    many = True
+    mapper_class = TechnicalExperienceMapper
+    model = TechnicalExperience
+
+    def get_query(self):
+        stmt = db.session.query(TechnicalExperience)
+        return stmt
+
+# JOE: NOTE: Disconnected until I have the auth figured out
 class TechnicalExperienceObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'
     url = '/<string:obj_id>'
@@ -28,4 +40,4 @@ class TechnicalExperienceObjectEndpoint(KimEndpoint, DBObjectMixin):
         return stmt
 
 technical_experiences_resource.add_endpoint(TechnicalExperiencesIndexEndpoint)
-technical_experiences_resource.add_endpoint(TechnicalExperienceObjectEndpoint)
+# technical_experiences_resource.add_endpoint(TechnicalExperienceObjectEndpoint)
