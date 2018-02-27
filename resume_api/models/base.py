@@ -13,12 +13,6 @@ def dump_datetime(value):
 
 # Source: http://piotr.banaszkiewicz.org/blog/2012/06/30/serialize-sqlalchemy-results-into-json/
 class DictSerializable(object):
-    def _asDict(self):
-        result = OrderedDict()
-        for key in self.__mapper__.c.keys():
-            result[key] = getattr(self, key)
-        return result
-
     @property
     def serialize(self):
        """Return object data in easily serializeable format"""
