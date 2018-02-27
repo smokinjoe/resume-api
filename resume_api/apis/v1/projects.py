@@ -7,7 +7,8 @@ from .mappers import ProjectMapper
 
 projects_resource = Resource('projects', __name__, url_prefix='/projects')
 
-class ProjectsIndexEndpoint(KimEndpoint, DBListMixin):
+
+class ProjectsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     name = 'list'
     many = True
     mapper_class = ProjectMapper
@@ -17,18 +18,7 @@ class ProjectsIndexEndpoint(KimEndpoint, DBListMixin):
         stmt = db.session.query(Project)
         return stmt
 
-# JOE: NOTE: Disconnected until I have the auth figured out
-class ProjectsCreateEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
-    name = 'list'
-    many = True
-    mapper_class = ProjectMapper
-    model = Project
 
-    def get_query(self):
-        stmt = db.session.query(Project)
-        return stmt
-
-# JOE: NOTE: Disconnected until I have the auth figured out
 class ProjectObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'
     url = '/<string:obj_id>'
@@ -39,5 +29,6 @@ class ProjectObjectEndpoint(KimEndpoint, DBObjectMixin):
         stmt = db.session.query(Project)
         return stmt
 
+
 projects_resource.add_endpoint(ProjectsIndexEndpoint)
-# projects_resource.add_endpoint(ProjectObjectEndpoint)
+projects_resource.add_endpoint(ProjectObjectEndpoint)

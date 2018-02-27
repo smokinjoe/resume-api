@@ -7,7 +7,8 @@ from .mappers import UserMapper
 
 users_resource = Resource('users', __name__, url_prefix='/users')
 
-class UsersIndexEndpoint(KimEndpoint, DBListMixin):
+
+class UsersIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
 
     name = 'list'
     many = True
@@ -20,21 +21,6 @@ class UsersIndexEndpoint(KimEndpoint, DBListMixin):
         return stmt
 
 
-# JOE: NOTE: Disconnected until I have the auth figured out
-class UsersIndexEndpoint(KimEndpoint, DBListMixin):
-
-    name = 'list'
-    many = True
-    mapper_class = UserMapper
-    model = User
-
-    def get_query(self):
-
-        stmt = db.session.query(User)
-        return stmt
-
-
-# JOE: NOTE: Disconnected until I have the auth figured out
 class UserObjectEndpoint(KimEndpoint, DBObjectMixin):
 
     name = 'object'
@@ -48,4 +34,4 @@ class UserObjectEndpoint(KimEndpoint, DBObjectMixin):
 
 
 users_resource.add_endpoint(UsersIndexEndpoint)
-# users_resource.add_endpoint(UserObjectEndpoint)
+users_resource.add_endpoint(UserObjectEndpoint)

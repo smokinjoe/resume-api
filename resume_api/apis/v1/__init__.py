@@ -18,10 +18,10 @@ api_v1_w_auth = ArrestedAPI(
     ]
 )
 
-api_v1.register_resource(users_resource, defer=True)
-api_v1.register_resource(projects_resource, defer=True)
-api_v1.register_resource(schools_resource, defer=True)
-api_v1.register_resource(weapons_of_choice_resource, defer=True)
-api_v1.register_resource(employment_experiences_resource, defer=True)
-api_v1.register_resource(technical_experiences_resource, defer=True)
+api_v1_w_auth.register_resource(users_resource, defer=True)
+api_v1_w_auth.register_resource(projects_resource, defer=True)
+api_v1_w_auth.register_resource(schools_resource, defer=True)
+api_v1_w_auth.register_resource(weapons_of_choice_resource, defer=True)
+api_v1_w_auth.register_resource(employment_experiences_resource, defer=True)
+api_v1_w_auth.register_resource(technical_experiences_resource, defer=True)
 api_v1.register_resource(resume_resource, defer=True)

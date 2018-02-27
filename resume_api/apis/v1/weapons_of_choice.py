@@ -7,17 +7,7 @@ from .mappers import WeaponOfChoiceMapper
 
 weapons_of_choice_resource = Resource('weapons_of_choice', __name__, url_prefix='/weapons_of_choice')
 
-class ProjectsIndexEndpoint(KimEndpoint, DBListMixin):
-    name = 'list'
-    many = True
-    mapper_class = WeaponOfChoiceMapper
-    model = WeaponOfChoice
 
-    def get_query(self):
-        stmt = db.session.query(WeaponOfChoice)
-        return stmt
-
-# JOE: NOTE: Disconnected until I have the auth figured out
 class ProjectsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     name = 'list'
     many = True
@@ -28,7 +18,7 @@ class ProjectsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
         stmt = db.session.query(WeaponOfChoice)
         return stmt
 
-# JOE: NOTE: Disconnected until I have the auth figured out
+
 class ProjectObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'
     url = '/<string:obj_id>'
@@ -39,5 +29,6 @@ class ProjectObjectEndpoint(KimEndpoint, DBObjectMixin):
         stmt = db.session.query(WeaponOfChoice)
         return stmt
 
+
 weapons_of_choice_resource.add_endpoint(ProjectsIndexEndpoint)
-# weapons_of_choice_resource.add_endpoint(ProjectObjectEndpoint)
+weapons_of_choice_resource.add_endpoint(ProjectObjectEndpoint)

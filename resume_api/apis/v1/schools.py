@@ -7,7 +7,8 @@ from .mappers import SchoolMapper
 
 schools_resource = Resource('schools', __name__, url_prefix='/schools')
 
-class SchoolsIndexEndpoint(KimEndpoint, DBListMixin):
+
+class SchoolsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     name = 'list'
     many = True
     mapper_class = SchoolMapper
@@ -17,18 +18,7 @@ class SchoolsIndexEndpoint(KimEndpoint, DBListMixin):
         stmt = db.session.query(School)
         return stmt
 
-# JOE: NOTE: Disconnected until I have the auth figured out
-class SchoolsCreateEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
-    name = 'list'
-    many = True
-    mapper_class = SchoolMapper
-    model = School
 
-    def get_query(self):
-        stmt = db.session.query(School)
-        return stmt
-
-# JOE: NOTE: Disconnected until I have the auth figured out
 class SchoolObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'
     url = '/<string:obj_id>'
@@ -40,4 +30,4 @@ class SchoolObjectEndpoint(KimEndpoint, DBObjectMixin):
         return stmt
 
 schools_resource.add_endpoint(SchoolsIndexEndpoint)
-# schools_resource.add_endpoint(SchoolObjectEndpoint)
+schools_resource.add_endpoint(SchoolObjectEndpoint)
