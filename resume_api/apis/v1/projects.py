@@ -7,6 +7,7 @@ from .mappers import ProjectMapper
 
 projects_resource = Resource('projects', __name__, url_prefix='/projects')
 
+
 class ProjectsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     name = 'list'
     many = True
@@ -17,6 +18,7 @@ class ProjectsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
         stmt = db.session.query(Project)
         return stmt
 
+
 class ProjectObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'
     url = '/<string:obj_id>'
@@ -26,6 +28,7 @@ class ProjectObjectEndpoint(KimEndpoint, DBObjectMixin):
     def get_query(self):
         stmt = db.session.query(Project)
         return stmt
+
 
 projects_resource.add_endpoint(ProjectsIndexEndpoint)
 projects_resource.add_endpoint(ProjectObjectEndpoint)

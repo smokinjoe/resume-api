@@ -7,6 +7,7 @@ from .mappers import EmploymentExperienceMapper
 
 employment_experiences_resource = Resource('employment_experiences', __name__, url_prefix='/employment_experiences')
 
+
 class EmploymentExperiencesIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     name = 'list'
     many = True
@@ -17,6 +18,7 @@ class EmploymentExperiencesIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin
         stmt = db.session.query(EmploymentExperience)
         return stmt
 
+
 class EmploymentExperienceObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'
     url = '/<string:obj_id>'
@@ -26,6 +28,7 @@ class EmploymentExperienceObjectEndpoint(KimEndpoint, DBObjectMixin):
     def get_query(self):
         stmt = db.session.query(EmploymentExperience)
         return stmt
+
 
 employment_experiences_resource.add_endpoint(EmploymentExperiencesIndexEndpoint)
 employment_experiences_resource.add_endpoint(EmploymentExperienceObjectEndpoint)

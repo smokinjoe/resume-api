@@ -7,6 +7,7 @@ from .mappers import SchoolMapper
 
 schools_resource = Resource('schools', __name__, url_prefix='/schools')
 
+
 class SchoolsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     name = 'list'
     many = True
@@ -16,6 +17,7 @@ class SchoolsIndexEndpoint(KimEndpoint, DBListMixin, DBCreateMixin):
     def get_query(self):
         stmt = db.session.query(School)
         return stmt
+
 
 class SchoolObjectEndpoint(KimEndpoint, DBObjectMixin):
     name = 'object'

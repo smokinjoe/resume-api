@@ -1,11 +1,11 @@
 from sqlalchemy_utils import EmailType, PasswordType
-from .base import db, BaseMixin
+from .base import db, BaseMixin, DictSerializable
 
 
 __all__ = ['User']
 
 
-class User(BaseMixin, db.Model):
+class User(BaseMixin, db.Model, DictSerializable):
 
     __tablename__ = 'resume_api_user'
 
@@ -22,3 +22,18 @@ class User(BaseMixin, db.Model):
     state = db.Column(db.Unicode(127))
     zip = db.Column(db.Unicode(127))
     phone = db.Column(db.Unicode(127))
+
+    @property
+    def serialize(self):
+        result = super(User, self).serialize
+        extra = {
+            'name'          : self.name,
+            'email'         : self.email,
+            'website'       : self.website,
+            'street_address': self.street_address,
+            'city'          : self.city,
+            'state'         : self.state,
+            'zip'           : self.zip,
+            'phone'         : self.phone
+        }
+        return dict(result, **extra)
