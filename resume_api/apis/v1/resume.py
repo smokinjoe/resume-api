@@ -14,7 +14,7 @@ class ResumeIndexEndpoint(Endpoint, GetObjectMixin):
             "employmentExperiences": [i.serialize for i in EmploymentExperience.query.all()],
             "schools": [i.serialize for i in School.query.all()],
             "technicalExperiences": [i.serialize for i in TechnicalExperience.query.all()],
-            # "user": [i.serialize for i in User.query.all()],
+            "user": [i.serialize for i in User.query.all()],
             "weaponsOfChoice": [i.serialize for i in WeaponOfChoice.query.all()]
         }
         return stmt
