@@ -12,9 +12,9 @@ class LoginEndpoint(Endpoint, GetObjectMixin):
 
     def handle_post_request(self):
         json_payload = request.get_json()
-        user_entry = User.query.filter_by(username=json_payload['username']).first().__dict__
+        user_entry = User.query.filter_by(username=json_payload['username']).first()
         if (user_entry):
-            user = User(user_entry['username'], user_entry['password'])
+            user = User(user_entry.__dict__['username'], user_entry.__dict__['password'])
             print(user.password, flush=True)
             print(json_payload['password'], flush=True)
             if (user.password == json_payload['password']):  # not for prod

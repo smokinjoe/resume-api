@@ -33,10 +33,6 @@ class User(BaseMixin, db.Model, DictSerializable, UserMixin):
         self.username = email
         self.password = password
 
-    def set_password(self, password):
-        #self.password = bcrypt.generate_password_hash(password)
-        self.password = password
-
     @property
     def serialize(self):
         result = super(User, self).serialize
@@ -51,9 +47,3 @@ class User(BaseMixin, db.Model, DictSerializable, UserMixin):
             'phone'         : self.phone
         }
         return dict(result, **extra)
-
-    # @classmethod
-    # def get(cls, id):
-    #     print(id, flush=True)
-    #     # return User.query.filter_by(username=id)
-    #     return cls.get(id)

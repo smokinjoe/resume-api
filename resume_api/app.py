@@ -1,4 +1,3 @@
-import flask_login
 from flask import Flask
 from flask_alembic import Alembic
 from flask_cors import CORS
@@ -18,14 +17,4 @@ def create_app():
     Alembic(app)
     CORS(app)
 
-    login_manager = flask_login.LoginManager()
-    login_manager.init_app(app)
-
-    # This seems stupid wrong
-    @login_manager.user_loader
-    def load_user(user_id):
-        user_entry = User.get(user_id)
-        return User(*user_entry)
-
     return app
-
