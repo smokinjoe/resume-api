@@ -8,6 +8,8 @@ from .technical_experiences import technical_experiences_resource
 from .resume import resume_resource
 from .middleware import get_api_client_from_request, get_client_token
 
+from .login import login_resource
+
 api_v1 = ArrestedAPI(url_prefix='/v1')
 
 api_v1_w_auth = ArrestedAPI(
@@ -25,3 +27,4 @@ api_v1_w_auth.register_resource(weapons_of_choice_resource, defer=True)
 api_v1_w_auth.register_resource(employment_experiences_resource, defer=True)
 api_v1_w_auth.register_resource(technical_experiences_resource, defer=True)
 api_v1.register_resource(resume_resource, defer=True)
+api_v1.register_resource(login_resource, defer=True)

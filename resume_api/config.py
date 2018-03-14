@@ -15,6 +15,7 @@ class Dev(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     BASIC_AUTH_USERNAME = 'admin'
     BASIC_AUTH_PASSWORD = 'secret'
+    SECRET_KEY = 'secret_xxx'
 
 
 settings = globals()[os.environ.get('FLASK_CONFIG', 'Dev')]
