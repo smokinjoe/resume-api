@@ -1,6 +1,9 @@
 import os
 
 
+THE_SECRET_KEY = os.environ.get('REACT_APP_JOE_RESUME_API_SECRET')
+
+
 class Config(object):
 
     ALEMBIC_CONTEXT = {
@@ -15,7 +18,6 @@ class Dev(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     BASIC_AUTH_USERNAME = 'admin'
     BASIC_AUTH_PASSWORD = 'secret'
-    SECRET_KEY = 'secret_xxx'
-
+    SECRET_KEY = THE_SECRET_KEY
 
 settings = globals()[os.environ.get('FLASK_CONFIG', 'Dev')]
