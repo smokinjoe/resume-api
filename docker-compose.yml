@@ -2,7 +2,10 @@ version: '2'
 
 services:
   api:
-    build: .
+    build:
+      context: .
+      args:
+        - REACT_APP_JOE_RESUME_API_SECRET=${REACT_APP_JOE_RESUME_API_SECRET}
     container_name: resume_api
     image: resume_api
     volumes:
