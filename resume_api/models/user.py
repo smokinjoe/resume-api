@@ -1,7 +1,7 @@
 from sqlalchemy_utils import EmailType, PasswordType, force_auto_coercion
 from .base import db, BaseMixin, DictSerializable
 from flask_login import UserMixin
-from passlib.apps import custom_app_context as pwd_context
+
 from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
 from resume_api.config import THE_SECRET_KEY
@@ -51,11 +51,8 @@ class User(BaseMixin, db.Model, DictSerializable, UserMixin):
         }
         return dict(result, **extra)
 
-    def hash_password(self, password):
-        self.password = pwd_context.encrypt(password)
-
     def verify_password(self, password):
-        return pwd_context.verify(password, self.password)
+        return password == self.password
 
     def generate_auth_token(self, expiration = 600):
         s = Serializer(THE_SECRET_KEY, expires_in = expiration)
