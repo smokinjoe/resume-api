@@ -13,28 +13,28 @@ from .token import token_resource
 # from .middleware import get_api_client_from_request, get_client_token
 
 
-auth = HTTPBasicAuth()
-
-@auth.error_handler
-def unauthorized():
-    # return 403 instead of 401 to prevent browsers from displaying the default
-    # auth dialog
-    return make_response(jsonify({'message': 'Unauthorized access'}), 403)
-
-# JOE: NOTE: This gets called when @auth.login_required is performed
-@auth.verify_password
-def verify_password(username_or_token, password):
-    # print('JOE:', flush=True)
-    # print(username_or_token, flush=True)
-    # first try to authenticate by token
-    user = User.verify_auth_token(username_or_token)
-    if not user:
-        # try to authenticate with username/password
-        user = User.query.filter_by(username = username_or_token).first()
-        if not user or not user.verify_password(password):
-            return False
-    g.user = user
-    return True
+# auth = HTTPBasicAuth()
+#
+# @auth.error_handler
+# def unauthorized():
+#     # return 403 instead of 401 to prevent browsers from displaying the default
+#     # auth dialog
+#     return make_response(jsonify({'message': 'Unauthorized access'}), 403)
+#
+# # JOE: NOTE: This gets called when @auth.login_required is performed
+# @auth.verify_password
+# def verify_password(username_or_token, password):
+#     # print('JOE:', flush=True)
+#     # print(username_or_token, flush=True)
+#     # first try to authenticate by token
+#     user = User.verify_auth_token(username_or_token)
+#     if not user:
+#         # try to authenticate with username/password
+#         user = User.query.filter_by(username = username_or_token).first()
+#         if not user or not user.verify_password(password):
+#             return False
+#     g.user = user
+#     return True
 
 # @app.route('/api/token')
 # @auth.login_required
@@ -42,9 +42,13 @@ def verify_password(username_or_token, password):
 #     token = g.user.generate_auth_token()
 #     return jsonify({ 'token': token.decode('ascii') })
 
-def verify_pass(endpoint):
+def verify_password(endpoint):
     auth = request.authorization
     print(auth, flush=True)
+
+    if auth is None:
+        payload = { 'message': 'Unauthorized.' }
+        endpoint.return_error(403, payload=payload)
 
     username_or_token = auth.username
     password = auth.password
@@ -68,7 +72,7 @@ api_v1_w_auth = ArrestedAPI(
         # get_api_client_from_request,
         # get_client_token
         # auth.login_required
-        verify_pass
+        verify_password
     ]
 )
 
