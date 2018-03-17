@@ -1,10 +1,9 @@
+from flask_login import UserMixin
+from flask import current_app
 from sqlalchemy_utils import EmailType, PasswordType, force_auto_coercion
 from .base import db, BaseMixin, DictSerializable
-from flask_login import UserMixin
-
 from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
-from resume_api.config import THE_SECRET_KEY
 
 force_auto_coercion()
 
@@ -55,12 +54,12 @@ class User(BaseMixin, db.Model, DictSerializable, UserMixin):
         return password == self.password
 
     def generate_auth_token(self, expiration = 600):
-        s = Serializer(THE_SECRET_KEY, expires_in = expiration)
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in = expiration)
         return s.dumps({ 'id': self.id })
 
     @staticmethod
     def verify_auth_token(token):
-        s = Serializer(THE_SECRET_KEY)
+        s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token)
         except SignatureExpired:
