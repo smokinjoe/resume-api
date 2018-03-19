@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_alembic import Alembic
 from flask_cors import CORS
-from resume_api.models import db
+from resume_api.models import db, User
 from resume_api.apis import api_v1, api_v1_w_auth
+
 
 def create_app():
 
@@ -18,3 +19,7 @@ def create_app():
     CORS(app)
 
     return app
+
+
+
+
