@@ -12,3 +12,14 @@ services:
       - ../resume-api:/opt/code
     ports:
       - "5000:5000"
+  web:
+    build:
+      context: .
+      args:
+        - REACT_APP_JOE_RESUME_API_SECRET=${REACT_APP_JOE_RESUME_API_SECRET}
+    container_name: resume_api_web
+    image: resume_api
+    volumes:
+      - ../resume-api:/opt/code
+    ports:
+      - "5000:5000"
