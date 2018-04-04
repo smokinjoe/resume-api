@@ -3,8 +3,7 @@ from flask_alembic import Alembic
 from flask_cors import CORS
 from resume_api.models import db, User
 from resume_api.apis import api_v1, api_v1_w_auth
-
-
+import os
 def create_app():
 
     app = Flask(__name__)
@@ -17,6 +16,8 @@ def create_app():
 
     Alembic(app)
     CORS(app)
+
+    port = int(os.environ.get("PORT", 5000))
 
     return app
 
