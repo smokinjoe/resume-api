@@ -53,7 +53,7 @@ class User(BaseMixin, db.Model, DictSerializable, UserMixin):
     def verify_password(self, password):
         return password == self.password
 
-    def generate_auth_token(self, expiration = 600):
+    def generate_auth_token(self, expiration = 30000):
         s = Serializer(current_app.config['SECRET_KEY'], expires_in = expiration)
         return s.dumps({ 'id': self.id })
 
