@@ -20,6 +20,6 @@ ENV FLASK_CONFIG Dev
 ENV FLASK_DEBUG 1
 ADD . /opt/code/
 RUN python /opt/code/setup.py develop
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000"]
 ARG REACT_APP_JOE_RESUME_API_SECRET
 ENV REACT_APP_JOE_RESUME_API_SECRET "$REACT_APP_JOE_RESUME_API_SECRET"
+CMD python resume_api/wsgi.py

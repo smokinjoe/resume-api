@@ -22,4 +22,4 @@ services:
     volumes:
       - ../resume-api:/opt/code
     ports:
-      - "5000:5000"
+      - "${PORT}:5000"
